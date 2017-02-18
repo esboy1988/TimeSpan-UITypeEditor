@@ -62,6 +62,9 @@ namespace TimeSpanPropGridTest
         }
 
 
+        /// <summary>
+        /// Handle user key presses, looking for escape key
+        /// </summary>
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -72,17 +75,12 @@ namespace TimeSpanPropGridTest
             return base.ProcessDialogKey(keyData);
         }
 
-        protected override void OnVisibleChanged(EventArgs e)
-        {
-            base.OnVisibleChanged(e);
-            if(this.Visible)
-            {
-                numHours.Focus();
-            }
-        }
 
         private void timerSetFocusHelper_Tick(object sender, EventArgs e)
         {
+            // Using a fast timer to quickly set the focus to the first non-zero
+            // numeric editor.. must be a better way but the obvious events didn't
+            // work - will improve later if needs be
             SetFocusToFirstNonZeroValue();
             timerSetFocusHelper.Stop();
         }
